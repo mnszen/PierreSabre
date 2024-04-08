@@ -14,6 +14,10 @@ public class Humain {
 		return argent;
 	}
 
+	public void setArgent(int argent) {
+		this.argent = argent;
+	}
+
 	public Humain(String nom, String boisson, int argent) {
 		this.nom = nom;
 		this.boisson = boisson;
@@ -32,11 +36,11 @@ public class Humain {
 		parler("mmmm un bon verre de " + this.boisson + "! gloups");
 	}
 
-	private void gagnerArgent(int gain) {
+	protected void gagnerArgent(int gain) {
 		this.argent += gain;
 	}
 
-	private void perdreArgent(int perte) {
+	protected void perdreArgent(int perte) {
 		this.argent -= perte;
 	}
 

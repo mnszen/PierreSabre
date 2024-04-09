@@ -4,7 +4,10 @@ public class Humain {
 
 	private String nom;
 	private String boisson;
-	private int argent;
+	protected int argent;
+	protected int Nbconnaissance = 0;
+	protected Humain[] connaissances = new Humain[MAX_CONNAISSANCES];
+    private static final int MAX_CONNAISSANCES = 30;
 
 	public String getNom() {
 		return nom;
@@ -25,7 +28,7 @@ public class Humain {
 	}
 
 	public void parler(String texte) {
-		System.out.println(texte);
+		System.out.println("(" + this.nom + ") " + texte);
 	}
 
 	public void direBonjour() {
@@ -53,4 +56,44 @@ public class Humain {
 					+ prix + " sous");
 		}
 	}
+
+	private int Nbreinstalisé = 0;
+
+    public void memoriser(Humain humain) {
+        if (Nbconnaissance < MAX_CONNAISSANCES) {
+            connaissances[Nbconnaissance] = humain;
+            Nbconnaissance++;
+        } else {
+            if (Nbreinstalisé < MAX_CONNAISSANCES) {
+                connaissances[Nbreinstalisé] = humain;
+                Nbreinstalisé++;
+            } else {
+                Nbreinstalisé = 0;
+                connaissances[Nbreinstalisé] = humain;
+                Nbreinstalisé++;
+            }
+        }
+    }
+
+	private void repondre(Humain humain1) {
+		direBonjour();
+		memoriser(humain1);
+	}
+
+	public void faireConnaissanceAvec(Humain humain2) {
+		direBonjour();
+		humain2.repondre(this);
+		this.memoriser(humain2);
+	}
+
+	public String listerConnaissance() {
+		String hommeConnus = "";
+		for (int i = 0; i <= Nbconnaissance; i++) {
+			if (connaissances[i] != null) {
+				hommeConnus += connaissances[i].getNom() + ",";
+			}
+		}
+		return hommeConnus;
+	}
+
 }
